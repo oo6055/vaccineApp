@@ -167,7 +167,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="v1Data:" />
+                android:text="NOT TAKEN" />
 
 
             <Space
@@ -180,7 +180,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="v2Data:"
+                android:text="NOT TAKEN"
                 android:visibility="gone" />
 
         </LinearLayout>

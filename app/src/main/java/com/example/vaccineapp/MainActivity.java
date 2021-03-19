@@ -9,12 +9,9 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-//import com.google.firebase.database.FirebaseDatabase;
-
-import java.time.LocalDate;
+import static com.example.vaccineapp.FBref.refStudents;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -119,5 +116,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void submit(View view) {
+        Student student=new Student(firstName.getText().toString(),secondName.getText().toString(),grade.getText().toString(),clas.getText().toString()
+        ,cond, new Vaccine(v1DataStr,v1Place.getText().toString()),new Vaccine(v2DataStr,v2Place.getText().toString()));
+        refStudents.push().setValue(student);
+
+        v1Data.setText("NOT TAKEN");
+        v2Data.setText("NOT TAKEN");
+        v1Place.setText("");
+        v2Place.setText("");
+        firstName.setText("");
+        secondName.setText("");
+        grade.setText("");
+        clas.setText("");
+        v1DataStr = "NOT TAKEN";
+        v2DataStr = "NOT TAKEN";
     }
 }

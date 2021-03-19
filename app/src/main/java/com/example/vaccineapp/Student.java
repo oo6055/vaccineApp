@@ -4,11 +4,20 @@ public class Student {
     private String privateName;
     private String secondName;
     private String grade; // format grade:class
-    boolean canBeVaccinated;
-    Vaccine v1;
-    Vaccine v2;
+    private boolean canBeVaccinated;
+    private Vaccine v1;
+    private Vaccine v2;
 
     // deafultiv
+    public Student()
+    {
+        this.privateName = "";
+        this.secondName = "";
+        this.grade = "";
+        this.canBeVaccinated = false;
+        this.v1 = null;
+        this.v2 = null;
+    }
     public Student(String privateName,String secondName,String grade,String clases, boolean canBeVaccinated,Vaccine v1,Vaccine v2)
     {
         this.privateName = privateName;
@@ -17,6 +26,24 @@ public class Student {
         this.canBeVaccinated = canBeVaccinated;
         this.v1 = v1;
         this.v2 = v2;
+    }
+
+    // wow
+    public String getFirstName()
+    {
+        return this.privateName;
+    }
+    public String getSecondName()
+    {
+        return this.secondName;
+    }
+    public String getGrade()
+    {
+        return this.grade;
+    }
+    public boolean getCanBeVaccinated()
+    {
+        return this.canBeVaccinated;
     }
     public Vaccine getVaccine1()
     {
