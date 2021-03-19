@@ -130,5 +130,10 @@ public class MainActivity extends AppCompatActivity {
         clas.setText("");
         v1DataStr = "NOT TAKEN";
         v2DataStr = "NOT TAKEN";
+
+        // clear the screen
+        v2.setVisibility(View.GONE);
+        v2Data.setVisibility(View.GONE);
+        v2Place.setVisibility(View.GONE);
     }
 }
