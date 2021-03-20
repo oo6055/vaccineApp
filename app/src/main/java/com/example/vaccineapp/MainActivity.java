@@ -3,13 +3,25 @@ package com.example.vaccineapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import static com.example.vaccineapp.FBref.refStudents;
 
@@ -136,4 +148,50 @@ public class MainActivity extends AppCompatActivity {
         v2Data.setVisibility(View.GONE);
         v2Place.setVisibility(View.GONE);
     }
+
+    /**
+     * onCreateContextMenu
+     * Short description.
+     * onCreateContextMenu listener use for the ContextMenu
+     * <p>
+     *     ContextMenu menu
+     *     View v
+     *     ContextMenu.ContextMenuInfo menuInfo
+     *
+     * @param  menu - the object,v - the item that selected ,menuInfo - the info
+     * @return	true if it success
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.generalmenu, menu);
+        return true;
+    }
+
+    /**
+     * onOptionsItemSelected
+     * Short description.
+     * what happen if an item was selected
+     * <p>
+     *     MenuItem item
+     *
+     * @param  item - the menuItem
+     * @return	true if it success
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String whatClicked = (String) item.getTitle();
+        Intent si;
+
+        if(whatClicked.equals("showData"))
+        {
+            si = new Intent(this,ShowData.class);
+            startActivity(si);
+        }
+
+        return  true;
+    }
 }
+
+
+

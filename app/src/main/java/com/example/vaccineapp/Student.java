@@ -53,4 +53,29 @@ public class Student {
     {
         return this.v2;
     }
+
+    public void setVaccine1(Vaccine v1)
+    {
+        this.v1 = v1;
+    }
+    public void setVaccine2(Vaccine v2)
+    {
+        this.v2 = v2;
+    }
+    public void setCanBeVaccinated(boolean b)
+    {
+        this.canBeVaccinated = b;
+    }
+    public void setGrade(String g)
+    {
+        this.grade = g;
+    }
+    public void setFirstName(String s)
+    {
+        this.privateName = s;
+    }
+    public void setSecondName(String s)
+    {
+        this.secondName = s;
+    }
 }
