@@ -4,6 +4,7 @@ public class Student {
     private String privateName;
     private String secondName;
     private String grade; // format grade:class
+    private String classStud;
     private boolean canBeVaccinated;
     private Vaccine v1;
     private Vaccine v2;
@@ -22,13 +23,18 @@ public class Student {
     {
         this.privateName = privateName;
         this.secondName = secondName;
-        this.grade = grade +":"+clases;
+        this.grade = grade;
+        this.classStud = clases;
         this.canBeVaccinated = canBeVaccinated;
         this.v1 = v1;
         this.v2 = v2;
     }
 
     // wow
+    public String getClassStud()
+    {
+        return this.classStud;
+    }
     public String getFirstName()
     {
         return this.privateName;
@@ -54,6 +60,9 @@ public class Student {
         return this.v2;
     }
 
+    public void setClassStud(String classe) {
+        this.classStud = classe;
+    }
     public void setVaccine1(Vaccine v1)
     {
         this.v1 = v1;
