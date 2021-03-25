@@ -2,20 +2,32 @@ package com.example.vaccineapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
@@ -23,11 +35,11 @@ import java.util.ArrayList;
 
 import static com.example.vaccineapp.FBref.refStudents;
 
-public class ShowData extends AppCompatActivity {
+public class ShowData extends AppCompatActivity implements View.OnCreateContextMenuListener {
 
     ListView ls;
-    ValueEventListener stuListener;
     ArrayList<Student> dataArr;
+    ArrayList<String> ids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,49 +47,231 @@ public class ShowData extends AppCompatActivity {
         setContentView(R.layout.activity_show_data);
 
         dataArr = new ArrayList<Student>();
-        ls = (ListView)findViewById(R.id.ls);
+        ls = (ListView) findViewById(R.id.ls);
 
-        readData();
-    }
-
-    private void readData() {
-        ValueEventListener stuListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dS) {
-                dataArr.clear();
-                for(DataSnapshot data : dS.getChildren()) {
-                    Student stuTmp = data.getValue(Student.class);
-                    dataArr.add(stuTmp);
-                }
-                CustomAdapter adp = new CustomAdapter(getApplicationContext(),dataArr);
-                ls.setAdapter(adp);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) { }
-        };
-        refStudents.addListenerForSingleValueEvent(stuListener);
 
     }
-    public void showByClasses(View view) {
+
+
+    public void showByGrades(View view) {
 
         Query q = refStudents.orderByChild("grade");
         ValueEventListener stuListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dS) {
                 dataArr.clear();
-                for(DataSnapshot data : dS.getChildren()) {
+                ids.clear();
+                for (DataSnapshot data : dS.getChildren()) {
                     Student stuTmp = data.getValue(Student.class);
                     dataArr.add(stuTmp);
+                    ids.add(data.getKey());
                 }
-                CustomAdapter adp = new CustomAdapter(getApplicationContext(),dataArr);
+                CustomAdapter adp = new CustomAdapter(getApplicationContext(), dataArr);
                 ls.setAdapter(adp);
             }
+
             @Override
-            public void onCancelled(DatabaseError databaseError) { }
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        q.addListenerForSingleValueEvent(stuListener);
+    }
+
+    public void showByOneGrade(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText et = new EditText(this);
+
+        builder.setView(et);
+        builder.setTitle("enter the grade that U wanne take:");
+
+        builder.setPositiveButton("submit",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Query q = refStudents.orderByChild("grade").startAt(et.getText().toString()).endAt(et.getText().toString());
+                        ValueEventListener stuListener = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dS) {
+                                dataArr.clear();
+                                ids.clear();
+                                for (DataSnapshot data : dS.getChildren()) {
+                                    Student stuTmp = data.getValue(Student.class);
+                                    dataArr.add(stuTmp);
+                                    ids.add(data.getKey());
+                                }
+                                CustomAdapter adp = new CustomAdapter(getApplicationContext(), dataArr);
+                                ls.setAdapter(adp);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        };
+                        q.addListenerForSingleValueEvent(stuListener);
+
+                    }
+                }
+        );
+        builder.setNegativeButton("cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.cancel();
+                    }
+                }
+        );
+
+        builder.show();
+    }
+
+    public void bySpecificClass(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText clas = new EditText(this);
+        final EditText grade = new EditText(this);
+
+        clas.setHint("class");
+        grade.setHint("grade");
+        LinearLayout ll = new LinearLayout(this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        ll.addView(clas);
+        ll.addView(grade);
+        builder.setView(ll);
+        builder.setTitle("enter the specific class that U wanne take:");
+
+        builder.setPositiveButton("submit",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        Query q = refStudents.orderByChild("classFormat").startAt(grade.getText().toString() + ":" + clas.getText().toString()).endAt(grade.getText().toString() + ":" + clas.getText().toString());
+                        ValueEventListener stuListener = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dS) {
+                                dataArr.clear();
+                                ids.clear();
+                                for (DataSnapshot data : dS.getChildren()) {
+                                    Student stuTmp = data.getValue(Student.class);
+                                    dataArr.add(stuTmp);
+                                    ids.add(data.getKey());
+                                }
+                                CustomAdapter adp = new CustomAdapter(getApplicationContext(), dataArr);
+                                ls.setAdapter(adp);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        };
+                        q.addListenerForSingleValueEvent(stuListener);
+
+                    }
+                }
+        );
+        builder.setNegativeButton("cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        dialog.cancel();
+                    }
+                }
+        );
+
+        builder.show();
+    }
+
+
+    /**
+     * onCreateContextMenu
+     * Short description.
+     * onCreateContextMenu listener use for the ContextMenu
+     * <p>
+     *     ContextMenu menu
+     *     View v
+     *     ContextMenu.ContextMenuInfo menuInfo
+     *
+     * @param  menu - the object,v - the item that selected ,menuInfo - the info
+     * @return	none
+     */
+    //@Overrid
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("options");
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options, menu);
+    }
+
+    /**
+     * onContextItemSelected
+     * Short description.
+     * onContextItemSelected listener use for the ContextMenu
+     * <p>
+     *     MenuItem item
+     *
+     * @param  item - the item that selected
+     * @return	true if it worked
+     */
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        String op = item.getTitle().toString();
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int i = info.position;
+
+        if (op.equals("show grades"))
+        {
+            si = new Intent(this,ShowGrades.class);
+            si.putExtra("name",students.get(i));
+            si.putExtra("toDo",true);
+            startActivity(si);
+        }
+        else if (op.equals("change details"))
+        {
+            si = new Intent(this,UpdateStudent.class);
+            si.putExtra("name",students.get(i));
+            si.putExtra("toDo",true);
+            startActivity(si);
+        }
+        else if (op.equals("delete student"))
+        {
+
+            db = hlp.getWritableDatabase();
+
+            // delete the grades
+            values = new ContentValues();
+            values.put(Grades.RELEVANT,false); // the new ID
+            db.update(Grades.TABLE_GRADES, values, "Student = ?", new String[]{getId(students.get(i))});
+
+            // delete the student
+            values = new ContentValues();
+
+            values.put(Students.ACTIVE, false);
+            db = hlp.getWritableDatabase();
+
+            db.update(Students.TABLE_STUDENTS, values, "_id = ?", new String[]{getId(students.get(i))});
+
+            db.close();
+            search(ls);
+        }
+        return true;
+    }
+
+    public void notCanBeVancied(View view) {
+        Query q = refStudents.orderByChild("canBeVaccinated").equalTo(false);
+        ValueEventListener stuListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dS) {
+                dataArr.clear();
+                ids.clear();
+                for (DataSnapshot data : dS.getChildren()) {
+                    Student stuTmp = data.getValue(Student.class);
+                    dataArr.add(stuTmp);
+                    ids.add(data.getKey());
+                }
+                CustomAdapter adp = new CustomAdapter(getApplicationContext(), dataArr);
+                ls.setAdapter(adp);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
         q.addListenerForSingleValueEvent(stuListener);
     }
 }
+
 
 
 class CustomAdapter extends BaseAdapter {
@@ -170,7 +364,7 @@ class CustomAdapter extends BaseAdapter {
         grade.setTextColor(Color.BLACK);
 
         name.setText(stud.getFirstName() + " " + stud.getSecondName());
-        grade.setText(stud.getGrade().replace(":","'"));
+        grade.setText(stud.getGrade() + "'" + stud.getAclassStud());
 
         if (stud.getCanBeVaccinated())
         {

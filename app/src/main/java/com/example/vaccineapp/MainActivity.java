@@ -130,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
     public void submit(View view) {
         Student student=new Student(firstName.getText().toString(),secondName.getText().toString(),grade.getText().toString(),clas.getText().toString()
         ,cond, new Vaccine(v1DataStr,v1Place.getText().toString()),new Vaccine(v2DataStr,v2Place.getText().toString()));
-        refStudents.push().setValue(student);
+        refStudents.child(clas.getText().toString() + firstName.getText().toString() + secondName.getText().toString() + grade.getText().toString() + String.valueOf(cond) +
+                v1DataStr + v1Place.getText().toString() + v2DataStr + v2Place.getText().toString() ).setValue(student);
 
         v1Data.setText("NOT TAKEN");
         v2Data.setText("NOT TAKEN");
