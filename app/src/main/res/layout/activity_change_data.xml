@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeData">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:orientation="vertical">
+
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="0.5
+" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/firstnameOfStudent"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="firstName"
+                android:textSize="36sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/secondnameOfStudent"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="secondName"
+                android:textSize="36sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/grade"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="grade"
+                android:textSize="36sp" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/clas"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="class"
+                android:textSize="36sp" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/canBe"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="canBeVanciated"
+                android:textSize="36sp" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/v1date"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="v1date"
+                android:textSize="36sp" />
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/v1loc"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="v1 location"
+                android:textSize="36sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/v2date"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="v2date"
+                android:textSize="36sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+            <TextView
+                android:id="@+id/v2dloc"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="20"
+                android:text="v2 location"
+                android:textSize="36sp" />
+
+
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5" />
+
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+</LinearLayout>

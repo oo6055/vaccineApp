@@ -47,7 +47,9 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         setContentView(R.layout.activity_show_data);
 
         dataArr = new ArrayList<Student>();
+        ids = new ArrayList<String>();
         ls = (ListView) findViewById(R.id.ls);
+        ls.setOnCreateContextMenuListener(this);
 
 
     }
@@ -209,41 +211,21 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         String op = item.getTitle().toString();
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int i = info.position;
+        Intent si;
 
-        if (op.equals("show grades"))
+        if (op.equals("change"))
         {
-            si = new Intent(this,ShowGrades.class);
-            si.putExtra("name",students.get(i));
+            si = new Intent(this,ChangeData.class);
+            si.putExtra("name",ids.get(i));
             si.putExtra("toDo",true);
             startActivity(si);
         }
-        else if (op.equals("change details"))
-        {
-            si = new Intent(this,UpdateStudent.class);
-            si.putExtra("name",students.get(i));
-            si.putExtra("toDo",true);
-            startActivity(si);
-        }
-        else if (op.equals("delete student"))
+        else if (op.equals("delete"))
         {
 
-            db = hlp.getWritableDatabase();
+            refStudents.child(ids.get(i)).removeValue();
 
-            // delete the grades
-            values = new ContentValues();
-            values.put(Grades.RELEVANT,false); // the new ID
-            db.update(Grades.TABLE_GRADES, values, "Student = ?", new String[]{getId(students.get(i))});
-
-            // delete the student
-            values = new ContentValues();
-
-            values.put(Students.ACTIVE, false);
-            db = hlp.getWritableDatabase();
-
-            db.update(Students.TABLE_STUDENTS, values, "_id = ?", new String[]{getId(students.get(i))});
-
-            db.close();
-            search(ls);
+            ls.setAdapter(null);
         }
         return true;
     }
