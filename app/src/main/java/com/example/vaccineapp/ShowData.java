@@ -58,7 +58,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
     public void showByGrades(View view) {
 
         Query q = refStudents.orderByChild("grade");
-        ValueEventListener stuListener = new ValueEventListener() {
+        q.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dS) {
                 dataArr.clear();
@@ -75,8 +75,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        };
-        q.addListenerForSingleValueEvent(stuListener);
+        });
     }
 
     public void showByOneGrade(View view) {
@@ -90,7 +89,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Query q = refStudents.orderByChild("grade").startAt(et.getText().toString()).endAt(et.getText().toString());
-                        ValueEventListener stuListener = new ValueEventListener() {
+                        q.addListenerForSingleValueEvent( new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dS) {
                                 dataArr.clear();
@@ -107,8 +106,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                             }
-                        };
-                        q.addListenerForSingleValueEvent(stuListener);
+                        });
 
                     }
                 }
@@ -142,7 +140,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Query q = refStudents.orderByChild("classFormat").startAt(grade.getText().toString() + ":" + clas.getText().toString()).endAt(grade.getText().toString() + ":" + clas.getText().toString());
-                        ValueEventListener stuListener = new ValueEventListener() {
+                        q.addListenerForSingleValueEvent( new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dS) {
                                 dataArr.clear();
@@ -159,8 +157,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
                             @Override
                             public void onCancelled(DatabaseError databaseError) {
                             }
-                        };
-                        q.addListenerForSingleValueEvent(stuListener);
+                        });
 
                     }
                 }
@@ -232,7 +229,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
 
     public void notCanBeVancied(View view) {
         Query q = refStudents.orderByChild("canBeVaccinated").equalTo(false);
-        ValueEventListener stuListener = new ValueEventListener() {
+        q.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dS) {
                 dataArr.clear();
@@ -249,8 +246,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        };
-        q.addListenerForSingleValueEvent(stuListener);
+        });
     }
 }
 

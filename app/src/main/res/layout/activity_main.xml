@@ -128,13 +128,13 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/classes"
+                android:id="@+id/grade"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="class" />
+                android:hint="grade"
+                android:inputType="textPersonName" />
 
             <Space
                 android:layout_width="0dp"
@@ -142,13 +142,14 @@
                 android:layout_weight="1" />
 
             <EditText
-                android:id="@+id/grade"
+                android:id="@+id/classes"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="grade" />
+                android:hint="class"
+                android:inputType="textPersonName" />
+
         </LinearLayout>
 
         <Space
