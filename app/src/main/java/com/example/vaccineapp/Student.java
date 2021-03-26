@@ -37,7 +37,7 @@ public class Student {
     {
         return this.classFormat;
     }
-    public String getAclassStud()
+    public String getClassStud()
     {
         return this.classStud;
     }
@@ -70,7 +70,7 @@ public class Student {
     {
         this.classFormat = s;
     }
-    public void setAclassStud(String classe) {
+    public void setClassStud(String classe) {
         this.classStud = classe;
     }
     public void setVaccine1(Vaccine v1)

@@ -346,7 +346,7 @@ class CustomAdapter extends BaseAdapter {
         grade.setTextColor(Color.BLACK);
 
         name.setText(stud.getFirstName() + " " + stud.getSecondName());
-        grade.setText(stud.getGrade() + "'" + stud.getAclassStud());
+        grade.setText(stud.getGrade() + "'" + stud.getClassStud());
 
         if (stud.getCanBeVaccinated())
         {
