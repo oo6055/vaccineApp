@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -248,6 +249,49 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
             }
         });
     }
+
+    /**
+     * onCreateContextMenu
+     * Short description.
+     * onCreateContextMenu listener use for the ContextMenu
+     * <p>
+     *     ContextMenu menu
+     *     View v
+     *     ContextMenu.ContextMenuInfo menuInfo
+     *
+     * @param  menu - the object,v - the item that selected ,menuInfo - the info
+     * @return	true if it success
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.generalmenu, menu);
+        return true;
+    }
+
+    /**
+     * onOptionsItemSelected
+     * Short description.
+     * what happen if an item was selected
+     * <p>
+     *     MenuItem item
+     *
+     * @param  item - the menuItem
+     * @return	true if it success
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String whatClicked = (String) item.getTitle();
+        Intent si;
+
+        if(whatClicked.equals("enterData"))
+        {
+            si = new Intent(this,MainActivity.class);
+            startActivity(si);
+        }
+
+        return  true;
+    }
 }
 
 
@@ -375,4 +419,6 @@ class CustomAdapter extends BaseAdapter {
 
         return view;
     }
+
+
 }
