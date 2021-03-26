@@ -72,6 +72,7 @@ public class Student {
     }
     public void setClassStud(String classe) {
         this.classStud = classe;
+        setClassFormat(this.grade + ":" + this.classStud);
     }
     public void setVaccine1(Vaccine v1)
     {
@@ -88,6 +89,7 @@ public class Student {
     public void setGrade(String g)
     {
         this.grade = g;
+        setClassFormat(this.grade + ":" + this.classStud);
     }
     public void setFirstName(String s)
     {

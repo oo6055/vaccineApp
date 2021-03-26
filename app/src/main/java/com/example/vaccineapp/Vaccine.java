@@ -14,6 +14,11 @@ public class Vaccine {
     {
         this.place = place;
         this.data = data;
+
+        if (data.equals("NOT TAKEN"))
+        {
+            this.place = "NOT TAKEN";
+        }
     }
 
     // geters

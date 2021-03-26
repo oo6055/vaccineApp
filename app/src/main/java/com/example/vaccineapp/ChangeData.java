@@ -16,9 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -135,25 +137,131 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
         builder = new AlertDialog.Builder(this);
         builder.setTitle("enter " + des[findIndex(idies, view.getId())]);
         final EditText et = new EditText(this);
+        final ToggleButton t = new ToggleButton(this);
+        final DatePicker d = new DatePicker(this);
 
-            // if it is phone number
-            if (findIndex(idies, view.getId()) == 3 || findIndex(idies, view.getId()) == 4 || findIndex(idies, view.getId()) == 7 || findIndex(idies, view.getId()) == 8)
+        // if it is phone number
+        if (findIndex(idies, view.getId()) == 3)
+        {
+            et.setInputType(InputType.TYPE_CLASS_NUMBER);
+            builder.setView(et);
+        }
+        else if(findIndex(idies, view.getId()) == 6 || findIndex(idies, view.getId()) == 8 ) // date
             {
-                et.setInputType(InputType.TYPE_CLASS_NUMBER);
+                d.setCalendarViewShown(false);
+
+                builder.setView(d);
             }
-            else
+            else if(findIndex(idies, view.getId()) == 4 ) // toggle
+            {
+                t.setTextOff("can't be");
+                t.setTextOn("can be");
+                t.setChecked(true);
+                builder.setView(t);
+            }
+            else // reguler
             {
                 builder.setView(et);
             }
-
-
 
             builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                 @Override
                 public void onClick(DialogInterface dialog,
                                     int which) {
-                    textVies[findIndex(idies, view.getId())].setText(et.getText());
+
+                    switch (findIndex(idies, view.getId()))
+                    {
+                        case 0:
+                            stud.setFirstName(et.getText().toString());
+                            textVies[findIndex(idies, view.getId())].setText(et.getText());
+                            break;
+                        case 1:
+                            stud.setGrade(et.getText().toString());
+                            textVies[findIndex(idies, view.getId())].setText(et.getText());
+                            break;
+                        case 2:
+                            stud.setSecondName(et.getText().toString());
+                            textVies[findIndex(idies, view.getId())].setText(et.getText());
+                            break;
+                        case 3:
+                            stud.setClassStud(et.getText().toString());
+                            textVies[findIndex(idies, view.getId())].setText(et.getText());
+                            break;
+                        case 4:
+                            stud.setCanBeVaccinated(t.isChecked());
+                            textVies[findIndex(idies, view.getId())].setText(String.valueOf(t.isChecked()));
+                            break;
+                        case 5:
+                            if(!stud.getCanBeVaccinated())
+                            {
+                                Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (stud.getVaccine1().getData().equals("NOT TAKEN"))
+                            {
+                                Toast.makeText(ChangeData.this, "please update the date first!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                stud.getVaccine1().setPlace(et.getText().toString());
+                                textVies[findIndex(idies, view.getId())].setText(et.getText());
+                            }
+                            break;
+                        case 6:
+                            if(!stud.getCanBeVaccinated())
+                            {
+                                Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                stud.getVaccine1().setData(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
+                                textVies[findIndex(idies, view.getId())].setText(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
+                            }
+
+                            break;
+                        case 7: // v2 loc
+                            if(!stud.getCanBeVaccinated())
+                            {
+                                Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (stud.getVaccine1().getData().equals("NOT TAKEN"))
+                            {
+                                Toast.makeText(ChangeData.this, "please update the first vaccine!", Toast.LENGTH_SHORT).show();
+                            }
+                            else if(stud.getVaccine2().getData().equals("NOT TAKEN"))
+                            {
+                                Toast.makeText(ChangeData.this, "please update the date first!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                stud.getVaccine2().setPlace(et.getText().toString());
+                                textVies[findIndex(idies, view.getId())].setText(et.getText());
+                            }
+
+                            break;
+                        case 8:
+                            if(!stud.getCanBeVaccinated())
+                            {
+                                Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (stud.getVaccine1().getData().equals("NOT TAKEN"))
+                            {
+                                Toast.makeText(ChangeData.this, "please update the first vaccine!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                stud.getVaccine1().setData(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
+                                textVies[findIndex(idies, view.getId())].setText(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
+                            }
+
+                            break;
+                    }
+
+                    refStudents.child(key).removeValue();
+                    key = stud.getClassStud() + stud.getFirstName() + stud.getSecondName() + stud.getGrade() + String.valueOf(stud.getCanBeVaccinated()) +
+                            stud.getVaccine1().getData() +stud.getVaccine1().getPlace() + stud.getVaccine2().getData() + stud.getVaccine2().getPlace();
+                    refStudents.child(key).setValue(stud);
+
 
                     // need to change thew graeds to the new ID and to update the system
                     dialog.cancel();
