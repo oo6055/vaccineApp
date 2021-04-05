@@ -58,7 +58,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
 
     public void showByGrades(View view) {
 
-        Query q = refStudents.orderByChild("grade");
+        Query q = refStudents.orderByChild("vaccine1/occur").equalTo(true);
         q.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dS) {
@@ -97,8 +97,11 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
                                 ids.clear();
                                 for (DataSnapshot data : dS.getChildren()) {
                                     Student stuTmp = data.getValue(Student.class);
-                                    dataArr.add(stuTmp);
-                                    ids.add(data.getKey());
+                                    if(stuTmp.getVaccine1().getOccur())
+                                    {
+                                        dataArr.add(stuTmp);
+                                        ids.add(data.getKey());
+                                    }
                                 }
                                 CustomAdapter adp = new CustomAdapter(getApplicationContext(), dataArr);
                                 ls.setAdapter(adp);
@@ -140,7 +143,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         builder.setPositiveButton("submit",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Query q = refStudents.orderByChild("classFormat").startAt(grade.getText().toString() + ":" + clas.getText().toString()).endAt(grade.getText().toString() + ":" + clas.getText().toString());
+                        Query q = refStudents.orderByChild("classFormat").startAt("true:" + grade.getText().toString() + ":" + clas.getText().toString()).endAt(grade.getText().toString() + ":" + clas.getText().toString());
                         q.addListenerForSingleValueEvent( new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dS) {

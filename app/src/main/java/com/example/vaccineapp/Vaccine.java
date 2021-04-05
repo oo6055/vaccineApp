@@ -3,6 +3,7 @@ package com.example.vaccineapp;
 public class Vaccine {
     private String place;
     private String data;
+    private boolean occured;
 
     // deafultiv
     public Vaccine()
@@ -14,9 +15,11 @@ public class Vaccine {
     {
         this.place = place;
         this.data = data;
+        this.occured = true;
 
         if (data.equals("NOT TAKEN"))
         {
+            occured = false;
             this.place = "NOT TAKEN";
         }
     }
@@ -33,6 +36,18 @@ public class Vaccine {
         return data;
     }
 
+    // geters
+    public boolean getOccur()
+    {
+        return occured;
+    }
+
+    // setters
+    public void setOccur(Boolean b)
+    {
+        this.occured = b;
+    }
+
     // setters
     public void setPlace(String place)
     {
@@ -41,6 +56,13 @@ public class Vaccine {
 
     public void setData(String data)
     {
+
         this.data = data;
+        occured = true;
+        if (data.equals("NOT TAKEN"))
+        {
+            occured = false;
+            this.place = "NOT TAKEN";
+        }
     }
 }

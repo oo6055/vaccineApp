@@ -258,7 +258,7 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
                     }
 
                     refStudents.child(key).removeValue();
-                    key = stud.getClassStud() + stud.getFirstName() + stud.getSecondName() + stud.getGrade() + String.valueOf(stud.getCanBeVaccinated()) +
+                    key = stud.getGrade() + stud.getClassStud() + stud.getFirstName() + stud.getSecondName() + String.valueOf(stud.getCanBeVaccinated()) +
                             stud.getVaccine1().getData() +stud.getVaccine1().getPlace() + stud.getVaccine2().getData() + stud.getVaccine2().getPlace();
                     refStudents.child(key).setValue(stud);
 

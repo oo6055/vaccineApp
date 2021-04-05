@@ -22,7 +22,7 @@ public class Student {
     }
     public Student(String privateName,String secondName,String grade,String clases, boolean canBeVaccinated,Vaccine v1,Vaccine v2)
     {
-        this.classFormat = grade + ":" + clases;
+        this.classFormat = String.valueOf(v1.getOccur()) + ":" + grade + ":" + clases;
         this.privateName = privateName;
         this.secondName = secondName;
         this.grade = grade;
