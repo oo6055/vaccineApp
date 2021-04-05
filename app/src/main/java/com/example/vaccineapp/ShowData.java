@@ -143,7 +143,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         builder.setPositiveButton("submit",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        Query q = refStudents.orderByChild("classFormat").startAt("true:" + grade.getText().toString() + ":" + clas.getText().toString()).endAt(grade.getText().toString() + ":" + clas.getText().toString());
+                        Query q = refStudents.orderByChild("classFormat").startAt("true:" + grade.getText().toString() + ":" + clas.getText().toString()).endAt("true:" + grade.getText().toString() + ":" + clas.getText().toString());
                         q.addListenerForSingleValueEvent( new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dS) {
