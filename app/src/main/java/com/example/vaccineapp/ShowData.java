@@ -67,7 +67,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
                 for (DataSnapshot data : dS.getChildren()) {
                     Student stuTmp = data.getValue(Student.class);
                     dataArr.add(stuTmp);
-                    ids.add(data.getKey()); 
+                    ids.add(data.getKey());
                 }
                 CustomAdapter adp = new CustomAdapter(getApplicationContext(), dataArr);
                 ls.setAdapter(adp);
