@@ -62,7 +62,7 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         q.addListenerForSingleValueEvent( new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dS) {
-                dataArr.clear();
+                dataArr.clear(); // com
                 ids.clear();
                 for (DataSnapshot data : dS.getChildren()) {
                     Student stuTmp = data.getValue(Student.class);
