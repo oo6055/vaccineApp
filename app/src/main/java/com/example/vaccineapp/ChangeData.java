@@ -250,7 +250,7 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
                             }
                             else
                             {
-                                stud.getVaccine1().setData(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
+                                stud.getVaccine2().setData(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
                                 textVies[findIndex(idies, view.getId())].setText(String.valueOf(d.getDayOfMonth()) + ":" + String.valueOf(d.getMonth() + 1) + ":" + d.getYear());
                             }
 
