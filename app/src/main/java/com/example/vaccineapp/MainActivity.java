@@ -20,11 +20,21 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import static com.example.vaccineapp.FBref.refStudents;
 
+/**
+ * The mainActivity activity.
+ *
+ *  @author Ori Ofek <oriofek106@gmail.com> 17/04/2021
+ *  @version 1.0
+ *  @since 17/04/2021
+ *  sort description:
+ *  this is the activty the implement the exercise that my teacher gave and in this activity I get the students...
+ */
 public class MainActivity extends AppCompatActivity {
 
     String v1DataStr;
@@ -61,10 +71,17 @@ public class MainActivity extends AppCompatActivity {
         cond = true;
         v1DataStr = "NOT TAKEN";
         v2DataStr = "NOT TAKEN";
-
-
     }
 
+    /**
+     * getDataOfVaccine.
+     * short dec: open the alert
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void getDataOfVaccine(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         DatePicker picker = new DatePicker(this);
@@ -102,6 +119,15 @@ public class MainActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * changeCond.
+     * short dec: if he change the details of the person
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void changeCond(View view) {
         cond = !cond;
         if(cond)
@@ -127,7 +153,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * changeCond.
+     * short dec: enter to the fire base
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void submit(View view) {
+        if(grade.getText().toString().equals("") || grade.getText().toString().length() != 1)
+        {
+            Toast.makeText(this, "invalid grade(should be one letter)", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(clas.getText().toString().equals("") || clas.getText().toString().length() != 1)
+        {
+            Toast.makeText(this, "invalid class(should be one number)", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(v1DataStr != "NOT TAKEN" && v1Place.getText().toString().equals(""))
+        {
+            Toast.makeText(this, "please enter location of vacc1", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(v2DataStr != "NOT TAKEN" && v2Place.getText().toString().equals(""))
+        {
+            Toast.makeText(this, "please enter location of vacc2", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+
         Student student=new Student(firstName.getText().toString(),secondName.getText().toString(),grade.getText().toString(),clas.getText().toString()
         ,cond, new Vaccine(v1Place.getText().toString(),v1DataStr),new Vaccine(v2Place.getText().toString(),v2DataStr));
         refStudents.child(grade.getText().toString() + clas.getText().toString() + firstName.getText().toString() + secondName.getText().toString() + String.valueOf(cond) +
@@ -193,6 +252,3 @@ public class MainActivity extends AppCompatActivity {
         return  true;
     }
 }
-
-
-

@@ -1,5 +1,14 @@
 package com.example.vaccineapp;
 
+/**
+ * The Students activity.
+ *
+ *  @author Ori Ofek <oriofek106@gmail.com> 17/04/2021
+ *  @version 1.0
+ *  @since 17/04/2021
+ *  sort description:
+ *  this is the activty the implement the exercise that my teacher gave and in this class there is a student
+ */
 public class Student {
     private String privateName;
     private String secondName;
@@ -76,14 +85,34 @@ public class Student {
     }
     public void setVaccine1(Vaccine v1)
     {
-        this.v1 = v1;
+        if(canBeVaccinated)
+        {
+            this.v1 = v1;
+        }
+        else
+        {
+            this.v1 = new Vaccine("NOT TAKEN","NOT TAKEN");
+        }
     }
     public void setVaccine2(Vaccine v2)
     {
-        this.v2 = v2;
+        if(canBeVaccinated)
+        {
+            this.v2 = v2;
+        }
+        else
+        {
+            this.v2 = new Vaccine("NOT TAKEN","NOT TAKEN");
+        }
     }
     public void setCanBeVaccinated(boolean b)
     {
+        if(!b)
+        {
+            this.v1 = new Vaccine("NOT TAKEN","NOT TAKEN");
+            this.v2 = new Vaccine("NOT TAKEN","NOT TAKEN");
+        }
+
         this.canBeVaccinated = b;
     }
     public void setGrade(String g)

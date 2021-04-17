@@ -31,6 +31,15 @@ import java.util.ArrayList;
 
 import static com.example.vaccineapp.FBref.refStudents;
 
+/**
+ * The changeData activity.
+ *
+ *  @author Ori Ofek <oriofek106@gmail.com> 17/04/2021
+ *  @version 1.0
+ *  @since 17/04/2021
+ *  sort description:
+ *  this is the activty the implement the exercise that my teacher gave and in this activity I change the students...
+ */
 public class ChangeData extends AppCompatActivity implements View.OnLongClickListener{
 
     TextView firstNametv;
@@ -44,8 +53,6 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
     TextView v2Datetv;
     String key;
     Student stud;
-    AutoCompleteTextView students;
-    ArrayList<String> tbl = new ArrayList<>();
     AlertDialog.Builder builder;
 
     @Override
@@ -117,13 +124,17 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
             }
         };
         q.addListenerForSingleValueEvent(stuListener);
-
-
-
-
-
     }
 
+    /**
+     * onLongClick.
+     * short dec: take teh data and change the db
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     @Override
     public boolean onLongClick(View view) {
         TextView[] textVies= {firstNametv,gradetv,secondNametv,classtv,canBetv,v1Loctv,
@@ -172,27 +183,27 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
 
                     switch (findIndex(idies, view.getId()))
                     {
-                        case 0:
+                        case 0: // the first name
                             stud.setFirstName(et.getText().toString());
                             textVies[findIndex(idies, view.getId())].setText(et.getText());
                             break;
-                        case 1:
+                        case 1: // the grade
                             stud.setGrade(et.getText().toString());
                             textVies[findIndex(idies, view.getId())].setText(et.getText());
                             break;
-                        case 2:
+                        case 2: // the second name
                             stud.setSecondName(et.getText().toString());
                             textVies[findIndex(idies, view.getId())].setText(et.getText());
                             break;
-                        case 3:
+                        case 3: // the class
                             stud.setClassStud(et.getText().toString());
                             textVies[findIndex(idies, view.getId())].setText(et.getText());
                             break;
-                        case 4:
+                        case 4: // the allergic
                             stud.setCanBeVaccinated(t.isChecked());
                             textVies[findIndex(idies, view.getId())].setText(String.valueOf(t.isChecked()));
                             break;
-                        case 5:
+                        case 5: // the first vaccine place
                             if(!stud.getCanBeVaccinated())
                             {
                                 Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();
@@ -207,7 +218,7 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
                                 textVies[findIndex(idies, view.getId())].setText(et.getText());
                             }
                             break;
-                        case 6:
+                        case 6: // the first vaccine date
                             if(!stud.getCanBeVaccinated())
                             {
                                 Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();
@@ -239,7 +250,7 @@ public class ChangeData extends AppCompatActivity implements View.OnLongClickLis
                             }
 
                             break;
-                        case 8:
+                        case 8: // v2 date
                             if(!stud.getCanBeVaccinated())
                             {
                                 Toast.makeText(ChangeData.this, "this student can be vancianted!", Toast.LENGTH_SHORT).show();

@@ -36,6 +36,15 @@ import java.util.ArrayList;
 
 import static com.example.vaccineapp.FBref.refStudents;
 
+/**
+ * The ShowData activity.
+ *
+ *  @author Ori Ofek <oriofek106@gmail.com> 15/02/2021
+ *  @version 1.0
+ *  @since 15/02/2021
+ *  sort description:
+ *  this is the activty the implement the exercise that my teacher gave and in this activity I show the data...
+ */
 public class ShowData extends AppCompatActivity implements View.OnCreateContextMenuListener {
 
     ListView ls;
@@ -51,11 +60,17 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         ids = new ArrayList<String>();
         ls = (ListView) findViewById(R.id.ls);
         ls.setOnCreateContextMenuListener(this);
-
-
     }
 
-
+    /**
+     * showByGrades.
+     * short dec: show the data by grade
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void showByGrades(View view) {
 
         Query q = refStudents.orderByChild("vaccine1/occur").equalTo(true);
@@ -79,6 +94,15 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         });
     }
 
+    /**
+     * showByOneGrade.
+     * short dec: show the data by one grade
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void showByOneGrade(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText et = new EditText(this);
@@ -126,6 +150,15 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         builder.show();
     }
 
+    /**
+     * bySpecificClass.
+     * short dec: show the data by specific class
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void bySpecificClass(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText clas = new EditText(this);
@@ -135,8 +168,9 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         grade.setHint("grade");
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
-        ll.addView(clas);
         ll.addView(grade);
+        ll.addView(clas);
+
         builder.setView(ll);
         builder.setTitle("enter the specific class that U wanne take:");
 
@@ -231,6 +265,15 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
         return true;
     }
 
+    /**
+     * notCanBeVancied.
+     * short dec: show the students that can't be vanniced
+     *
+     * <p>
+     *      View view
+     * @param	view - see which tv pressed
+     * @return	none
+     */
     public void notCanBeVancied(View view) {
         Query q = refStudents.orderByChild("canBeVaccinated").equalTo(false);
         q.addListenerForSingleValueEvent( new ValueEventListener() {
@@ -298,7 +341,15 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
 }
 
 
-
+/**
+ * The CustomAdapter activity.
+ *
+ *  @author Ori Ofek <oriofek106@gmail.com> 17/04/2021
+ *  @version 1.0
+ *  @since 17/04/2021
+ *  sort description:
+ *  temp for the customAdp
+ */
 class CustomAdapter extends BaseAdapter {
     Context context;
     ArrayList<Student> data;

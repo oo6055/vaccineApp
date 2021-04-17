@@ -1,5 +1,14 @@
 package com.example.vaccineapp;
 
+/**
+ * The Students activity.
+ *
+ *  @author Ori Ofek <oriofek106@gmail.com> 17/04/2021
+ *  @version 1.0
+ *  @since 17/04/2021
+ *  sort description:
+ *  this is the activty the implement the exercise that my teacher gave and in this class there is a vaccine
+ */
 public class Vaccine {
     private String place;
     private String data;
