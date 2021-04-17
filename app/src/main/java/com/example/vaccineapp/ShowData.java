@@ -335,6 +335,11 @@ public class ShowData extends AppCompatActivity implements View.OnCreateContextM
             si = new Intent(this,MainActivity.class);
             startActivity(si);
         }
+        else if(whatClicked.equals("credits"))
+        {
+            si = new Intent(this,Credits.class);
+            startActivity(si);
+        }
 
         return  true;
     }

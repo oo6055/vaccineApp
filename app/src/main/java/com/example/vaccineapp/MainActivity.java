@@ -248,6 +248,11 @@ public class MainActivity extends AppCompatActivity {
             si = new Intent(this,ShowData.class);
             startActivity(si);
         }
+        else if(whatClicked.equals("credits"))
+        {
+            si = new Intent(this,Credits.class);
+            startActivity(si);
+        }
 
         return  true;
     }
